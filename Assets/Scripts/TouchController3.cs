@@ -3,80 +3,123 @@ using UnityEngine.UI;
 
 public class TouchController3 : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private Image brakeImage;
     [SerializeField] private Image stearImage;
     [SerializeField] private float maxStearingAngle = 45f;
     [SerializeField] private float maxDeltaRangeLeftTouch = 50f;
-    [SerializeField] private float steeringReturnSpeed = 100f ; //degree per second
-    private float brake = 0;
+    [SerializeField] private float steeringReturnSpeed = 100f; // degrees per second
 
-    [SerializeField] private int leftTouchId = -1;
-    [SerializeField] private int rightTouchId = -1;
-
-    [SerializeField] private bool leftTouchIsActive = true;
-
-    private float horizontalDelta = 0;
-
+    private float horizontalDelta = 0f;
     private bool IsControlling = false;
 
-    // Update is called once per frame
+    // Touch tracking
+    private int leftTouchId = -1;
+    [SerializeField] private bool leftTouchIsActive = true;
+
+    // Mouse tracking
+    private bool isMouseControlling = false;
+    private Vector2 lastMousePos;
+
     void Update()
     {
-        // Process touches if there is at least one on the screen
-        if (Input.touchCount > 0)
+        HandleTouchInput();
+        HandleMouseInput();
+        ReturnSteeringToCenter();
+    }
+
+    private void HandleTouchInput()
+    {
+        if (Input.touchCount == 0) return;
+
+        foreach (Touch touch in Input.touches)
         {
-            foreach (Touch touch in Input.touches)
+            // Start or continue steering on left half
+            if (leftTouchIsActive
+                && touch.position.x < Screen.width / 2
+                && touch.fingerId != leftTouchId)
             {
-                if (leftTouchIsActive && touch.position.x < Screen.width / 2 && touch.fingerId != rightTouchId)
+                if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
                 {
                     IsControlling = true;
                     leftTouchId = touch.fingerId;
-                    //left side
-                    // Only process movement when the touch is moving
-                    if (touch.phase == TouchPhase.Moved)
-                    {
-                        // Get the horizontal movement (deltaPosition.x)
-                        horizontalDelta += touch.deltaPosition.x;
-
-                        horizontalDelta = Mathf.Clamp(horizontalDelta, -maxDeltaRangeLeftTouch, maxDeltaRangeLeftTouch);
-
-                        float degree = horizontalDelta * maxStearingAngle / maxDeltaRangeLeftTouch;
-                        // Apply steering based on the horizontal delta and sensitivity
-                        Debug.Log(horizontalDelta);
-                        stearImage.transform.localRotation = Quaternion.Euler(0, 0, -degree);
-                    }
-                }
-
-
-                // clear the finger
-                if (touch.phase == TouchPhase.Ended)
-                {
-                    if (leftTouchId == touch.fingerId)
-                    {
-                        leftTouchId = -1;
-                        IsControlling = false;
-                    }
                 }
             }
-        }
 
-        if (!IsControlling && stearImage.transform.localEulerAngles.z != 0)
+            if (touch.fingerId == leftTouchId && touch.phase == TouchPhase.Moved)
+            {
+                ApplyHorizontalDelta(touch.deltaPosition.x);
+            }
+
+            // End touch
+            if (touch.fingerId == leftTouchId && (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled))
+            {
+                ResetControl();
+            }
+        }
+    }
+
+    private void HandleMouseInput()
+    {
+        // Only when no touch is active
+        if (Input.touchCount > 0) return;
+
+        Vector2 mousePos = Input.mousePosition;
+
+        // Start mouse control
+        if (Input.GetMouseButtonDown(0) && mousePos.x < Screen.width / 2)
         {
-            // todo smoothly rotate until reach zero at Z axis 
-            // Rotate the steering wheel image back to identity over time
-            stearImage.transform.localRotation = Quaternion.RotateTowards(
-                stearImage.transform.localRotation,
-                Quaternion.identity,
-                steeringReturnSpeed * Time.deltaTime
-            );
-
-            // Also ease horizontalDelta back to zero so it lines up next time you touch
-            horizontalDelta = Mathf.MoveTowards(
-                horizontalDelta,
-                0f,
-                (maxDeltaRangeLeftTouch / maxStearingAngle) * steeringReturnSpeed * Time.deltaTime
-            );
+            isMouseControlling = true;
+            IsControlling = true;
+            lastMousePos = mousePos;
         }
+
+        // Continue dragging
+        if (isMouseControlling && Input.GetMouseButton(0))
+        {
+            float deltaX = mousePos.x - lastMousePos.x;
+            ApplyHorizontalDelta(deltaX);
+            lastMousePos = mousePos;
+        }
+
+        // Release mouse
+        if (isMouseControlling && Input.GetMouseButtonUp(0))
+        {
+            ResetControl();
+        }
+    }
+
+    private void ApplyHorizontalDelta(float deltaX)
+    {
+        horizontalDelta += deltaX;
+        horizontalDelta = Mathf.Clamp(horizontalDelta, -maxDeltaRangeLeftTouch, maxDeltaRangeLeftTouch);
+
+        float angle = horizontalDelta * maxStearingAngle / maxDeltaRangeLeftTouch;
+        stearImage.transform.localRotation = Quaternion.Euler(0, 0, -angle);
+    }
+
+    private void ReturnSteeringToCenter()
+    {
+        if (IsControlling) return;
+
+        // Smoothly rotate back to zero
+        stearImage.transform.localRotation = Quaternion.RotateTowards(
+            stearImage.transform.localRotation,
+            Quaternion.identity,
+            steeringReturnSpeed * Time.deltaTime
+        );
+
+        // Ease horizontalDelta back to zero as well
+        horizontalDelta = Mathf.MoveTowards(
+            horizontalDelta,
+            0f,
+            (maxDeltaRangeLeftTouch / maxStearingAngle) * steeringReturnSpeed * Time.deltaTime
+        );
+    }
+
+    private void ResetControl()
+    {
+        leftTouchId = -1;
+        isMouseControlling = false;
+        IsControlling = false;
     }
 }
