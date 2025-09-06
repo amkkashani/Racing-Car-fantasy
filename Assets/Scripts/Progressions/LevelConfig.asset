@@ -1,0 +1,495 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6aa3b07db130d54aa8a80392f9c1e3a, type: 3}
+  m_Name: LevelConfig
+  m_EditorClassIdentifier: 
+  tiers:
+  - levelNumber: 1
+    minKm: 0
+    levelName: Rookie
+    badgeSprite: {fileID: -1591909160, guid: 7b3ad8521f893e04b95a9a1943f7d56f, type: 3}
+    avatarSprite: {fileID: -2052832756, guid: f1302b6b3ac42c14586dbc4336ea81b7, type: 3}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 2
+    minKm: 10
+    levelName: Driver
+    badgeSprite: {fileID: -326604461, guid: 7b3ad8521f893e04b95a9a1943f7d56f, type: 3}
+    avatarSprite: {fileID: 1507041954, guid: f1302b6b3ac42c14586dbc4336ea81b7, type: 3}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 3
+    minKm: 25
+    levelName: Racer
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 4
+    minKm: 50
+    levelName: Pro
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 5
+    minKm: 100
+    levelName: Legend
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 6
+    minKm: 150
+    levelName: Sprinter
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 7
+    minKm: 200
+    levelName: Cruiser
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 8
+    minKm: 300
+    levelName: Speedster
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 9
+    minKm: 400
+    levelName: Challenger
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 10
+    minKm: 500
+    levelName: Striker
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 11
+    minKm: 650
+    levelName: Pursuer
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 12
+    minKm: 800
+    levelName: Trailblazer
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 13
+    minKm: 1000
+    levelName: Swift Rider
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 14
+    minKm: 1250
+    levelName: Jetstream
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 15
+    minKm: 1500
+    levelName: Turbo
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 16
+    minKm: 1800
+    levelName: Storm Rider
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 17
+    minKm: 2100
+    levelName: Drifter
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 18
+    minKm: 2500
+    levelName: Nitro
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 19
+    minKm: 3000
+    levelName: Vortex
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 20
+    minKm: 3500
+    levelName: Accelerator
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 21
+    minKm: 4000
+    levelName: Overtaker
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 22
+    minKm: 4600
+    levelName: Heatseeker
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 23
+    minKm: 5200
+    levelName: Road Warrior
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 24
+    minKm: 6000
+    levelName: Speed Demon
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 25
+    minKm: 7000
+    levelName: Highway Star
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 26
+    minKm: 8000
+    levelName: Iron Driver
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 27
+    minKm: 9500
+    levelName: Track Master
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 28
+    minKm: 11000
+    levelName: Velocity
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 29
+    minKm: 12500
+    levelName: Supersonic
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 30
+    minKm: 14000
+    levelName: Phantom Rider
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 31
+    minKm: 16000
+    levelName: Dominant Force
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 32
+    minKm: 18000
+    levelName: Mach Breaker
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 33
+    minKm: 20000
+    levelName: Overdrive
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 34
+    minKm: 22500
+    levelName: Track Titan
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 35
+    minKm: 25000
+    levelName: Inferno
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 36
+    minKm: 28000
+    levelName: Warp Rider
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 37
+    minKm: 31000
+    levelName: Gravity Bender
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 38
+    minKm: 35000
+    levelName: Eclipse
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 39
+    minKm: 40000
+    levelName: Apex Predator
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0
+  - levelNumber: 40
+    minKm: 50000
+    levelName: Immortal Legend
+    badgeSprite: {fileID: 0}
+    avatarSprite: {fileID: 0}
+    env:
+      isDefined: 0
+      isNight: 0
+      fogDensity: 0
+      fogColor: {r: 0, g: 0, b: 0, a: 0}
+      trafficDensity: 0
+      rainAmount: 0

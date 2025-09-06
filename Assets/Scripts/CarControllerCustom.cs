@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityStandardAssets.Vehicles.Car;
 
-public class CarControllerCustom : MonoBehaviour,ICar
+public class CarControllerCustom : MonoBehaviour, ICar
 {
     // ────────────────────────────────────────────────────────────
     //  Movement
     // ────────────────────────────────────────────────────────────
     [Header("Movement Settings")]
     public float motorTorque   = 1500f;   // Torque per wheel (Nm)
-    public float brakeTorque   = 3000f;   // Max hand‑brake force (Nm)
+    public float brakeTorque   = 3000f;   // Max hand-brake force (Nm)
     public float maxSteerAngle = 30f;     // Degrees
     public float maxSpeed      = 50f;     // km/h speed cap
     public float steerSpeed    = 5f;      // Lerp speed for steering
@@ -25,91 +25,40 @@ public class CarControllerCustom : MonoBehaviour,ICar
     public Transform rearLeftMesh;
     public Transform rearRightMesh;
 
-    [Header("Health")]
-    public int health = 100;
-    
-    // ── Telemetry for other scripts ──
+    // Telemetry for other scripts
     public float CurrentSpeedKmh => _rb.linearVelocity.magnitude * 3.6f;
-    public float ThrottleInput   { get; private set; }   // –1…1
+    public float ThrottleInput   { get; private set; }
     public bool  IsBraking       { get; private set; }
-
-    
-    
-    // ────────────────────────────────────────────────────────────
-    //  Optional section reskinning
-    // ────────────────────────────────────────────────────────────
-    [Header("Optional Section To Reskin")]
-    [Tooltip("Assign the Renderer you’d like to swap material on at runtime.")]
-    public Renderer sectionRenderer;
 
     private Rigidbody _rb;
 
-    // ────────────────────────────────────────────────────────────
-    //  Unity Callbacks
-    // ────────────────────────────────────────────────────────────
+    [Header("Handling Settings")] 
+    [SerializeField] private float stiffnessCoefficientSideWay = 1.5f;
+    [SerializeField] private float StiffnessCoefficenitForward = 1.3f;
 
-    // private void Update()
-    // {
-    //     HandleInput();
-    //     UpdateWheelVisuals();
-    // }
+    // Reverse logic
+    private bool reversing = false;
+    [SerializeField] private float reverseDelay = 0.6f;     // Hold brake this long to reverse
+    [SerializeField] private float stopThreshold = 0.2f;    // Speed threshold (m/s) considered "stopped"
+    private float brakeHeldTime = 0f;
 
-
-    // if set damage return false it means the car is dead
-    public bool setDamage(int damage)
-    {
-        health -= damage;
-
-        if (health <= 0)
-        {
-            health = 0;
-            return false;
-        }
-
-        return true;
-    }
-    
-    
-    
-    // ────────────────────────────────────────────────────────────
-    //  Input & Movement
-    // ────────────────────────────────────────────────────────────
-    private void HandleInput()
-    {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-
-        // Clamp velocity to maxSpeed (converted from m/s ➔ km/h)
-        float speedKmh = _rb.linearVelocity.magnitude * 3.6f;
-        
-        float torque   = (speedKmh < maxSpeed || v < 0f) ? motorTorque * v : 0f;
-
-        ApplyDrive(torque);
-        ApplySteer(h);
-        ApplyBrakes(Input.GetKey(KeyCode.Space));
-    }
-    
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        // Example: tighten both curves a bit right after you grab the colliders
         TuneTire(frontLeftCollider);
         TuneTire(frontRightCollider);
         TuneTire(rearLeftCollider);
         TuneTire(rearRightCollider);
     }
 
-    [Header("Handling Settings")] [SerializeField]
-    private float stiffnessCoefficientSideWay = 1.5f;
-    [SerializeField]private float StiffnessCoefficenitForward = 1.3f;
-    void TuneTire(WheelCollider col)
+    private void TuneTire(WheelCollider col)
     {
         WheelFrictionCurve f = col.sidewaysFriction;
-        f.stiffness *= stiffnessCoefficientSideWay;          // 1 = default. 1.5–2 is grippier. Don’t exceed ~5.
+        f.stiffness *= stiffnessCoefficientSideWay;
         col.sidewaysFriction = f;
 
         f = col.forwardFriction;
-        f.stiffness *= StiffnessCoefficenitForward;          // Helps with traction under throttle/brake.
+        f.stiffness *= StiffnessCoefficenitForward;
         col.forwardFriction = f;
     }
 
@@ -128,18 +77,14 @@ public class CarControllerCustom : MonoBehaviour,ICar
         frontRightCollider.steerAngle = Mathf.Lerp(frontRightCollider.steerAngle, target, Time.deltaTime * steerSpeed);
     }
 
-    private void ApplyBrakes(bool braking)
+    private void ApplyBrakes(float brake)
     {
-        float brake = braking ? brakeTorque : 0f;
         frontLeftCollider.brakeTorque  = brake;
         frontRightCollider.brakeTorque = brake;
         rearLeftCollider.brakeTorque   = brake;
         rearRightCollider.brakeTorque  = brake;
     }
 
-    // ────────────────────────────────────────────────────────────
-    //  Wheel mesh syncing
-    // ────────────────────────────────────────────────────────────
     private void UpdateWheelVisuals()
     {
         UpdateWheel(frontLeftCollider,  frontLeftMesh);
@@ -156,34 +101,54 @@ public class CarControllerCustom : MonoBehaviour,ICar
     }
 
     // ────────────────────────────────────────────────────────────
-    //  Public API: reskinning the assigned section
+    //  Public API: ICar
     // ────────────────────────────────────────────────────────────
-    /// <summary>
-    /// Swaps the material on the optional <see cref="sectionRenderer"/>, if both the
-    /// renderer and the new material are non‑null.
-    /// </summary>
-    /// <param name="newMaterial">Material to apply.</param>
-    public void ApplySectionMaterial(Material newMaterial)
-    {
-        if (sectionRenderer != null && newMaterial != null)
-        {
-            sectionRenderer.material = newMaterial;
-        }
-    }
-
     public void Move(float steering, float accel, float footbrake, float handbrake)
     {
-        // Clamp velocity to maxSpeed (converted from m/s ➔ km/h)
         float speedKmh = _rb.linearVelocity.magnitude * 3.6f;
-        float torque   = (speedKmh < maxSpeed || accel < 0f) ? motorTorque * accel : 0f;
+
+        // braking input check
+        bool brakingInput = (footbrake > 0 || handbrake > 0);
+
+        // reverse detection
+        if (brakingInput)
+        {
+            if (speedKmh < stopThreshold * 3.6f) // car nearly stopped
+            {
+                brakeHeldTime += Time.deltaTime;
+                if (brakeHeldTime > reverseDelay)
+                {
+                    reversing = true;
+                }
+            }
+            else
+            {
+                brakeHeldTime = 0f;
+            }
+        }
+        else
+        {
+            brakeHeldTime = 0f;
+            reversing = false;
+        }
+
+        float torque = 0f;
+        if (reversing)
+        {
+            torque = -motorTorque * Mathf.Abs(footbrake); // reverse drive
+            ApplyBrakes(0f);
+        }
+        else
+        {
+            torque = (speedKmh < maxSpeed || accel < 0f) ? motorTorque * accel : 0f;
+            ApplyBrakes(brakingInput ? brakeTorque : 0f);
+        }
 
         ApplyDrive(torque);
         ApplySteer(steering);
-        ApplyBrakes(footbrake != 0 || handbrake != 0);
-        
-        
+
         ThrottleInput = accel;
-        IsBraking     = footbrake != 0 || handbrake != 0;
+        IsBraking     = brakingInput && !reversing;
         UpdateWheelVisuals();
     }
 }

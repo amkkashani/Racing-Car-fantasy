@@ -10,6 +10,7 @@ public class DeformOnCollision : MonoBehaviour
 {
     // cached data
     [SerializeField] private Transform _meshOwner;
+    [SerializeField] private float damageDamper = 10;
     Mesh _mesh; // unique per instance
 
     // working copy used by jobs
@@ -55,6 +56,7 @@ public class DeformOnCollision : MonoBehaviour
         foreach (var contact in c.contacts)
         {
             float speed = c.relativeVelocity.magnitude; // how hard we hit
+            GameManagerEndless.Instance.SetDamage((int)(speed/damageDamper));
             if (speed < 0.1f) continue; // ignore micro-scratches
 
             var job = new DeformJob

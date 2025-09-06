@@ -41,18 +41,18 @@ namespace Racing2D
         private void Update()
         {
             accel = (Input.GetKey(KeyCode.W) ? 1f : 0f);
-            footbrake = Input.GetKey(KeyCode.S) ? -1f : 0f;
+            footbrake = Input.GetKey(KeyCode.S) ? 1f : 0f;
 
             accel += gas.isPressed ? 1f : 0f;
-            footbrake += brake.isPressed ? -1f : 0f;
+            footbrake += brake.isPressed ? 1f : 0f;
 
             // steering += touchWheel;
 
-            if (touchWheel == 0)
-            {
+           
                 //if no one touch any thing we will read data from keyboard
                 steering = (Input.GetKey(KeyCode.A) ? -1f : 0f) +
-                           (Input.GetKey(KeyCode.D) ? 1f : 0f);;
+                           (Input.GetKey(KeyCode.D) ? 1f : 0f);; if (touchWheel == 0)
+            {
             }
             else
             {
