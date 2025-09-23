@@ -3971,11 +3971,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelConfig: {fileID: 11400000, guid: 16ea4bf92f22c344186367e43f30ca4d, type: 2}
   enablePersistence: 1
-  totalKm: 1236.4
-  money: 174
-  collisions: 563
-  level: 16
-  totalPlaySeconds: 149.57
+  totalKm: 0
+  money: 0
+  collisions: 0
+  level: 1
+  totalPlaySeconds: 0
   lastAppliedEnvTierIndex: -1
   OnLevelChanged:
     m_PersistentCalls:

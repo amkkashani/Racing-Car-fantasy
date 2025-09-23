@@ -78,7 +78,7 @@ public class ProgressionSystem : SingletonMagic<ProgressionSystem>
         OnKmChanged?.Invoke((float)totalKm);
 
         RecalculateLevel(forceEvent: false);
-        if (enablePersistence) Save();
+        // if (enablePersistence) Save();
     }
 
     /// If you already track KM elsewhere, set it directly.
@@ -91,7 +91,7 @@ public class ProgressionSystem : SingletonMagic<ProgressionSystem>
         OnKmChanged?.Invoke((float)totalKm);
 
         RecalculateLevel(forceEvent: false);
-        if (enablePersistence) Save();
+        // if (enablePersistence) Save();
     }
 
     /// Hook your own money system here. Positive or negative; clamps at 0.
@@ -103,7 +103,7 @@ public class ProgressionSystem : SingletonMagic<ProgressionSystem>
         if (money != prev)
         {
             OnMoneyChanged?.Invoke(money);
-            if (enablePersistence) Save();
+            // if (enablePersistence) Save();
         }
     }
 
@@ -114,7 +114,7 @@ public class ProgressionSystem : SingletonMagic<ProgressionSystem>
 
         money = value;
         OnMoneyChanged?.Invoke(money);
-        if (enablePersistence) Save();
+        // if (enablePersistence) Save();
     }
 
     /// Push total collisions if you track it elsewhere…
@@ -125,7 +125,7 @@ public class ProgressionSystem : SingletonMagic<ProgressionSystem>
 
         collisions = value;
         OnCollisionsChanged?.Invoke(collisions);
-        if (enablePersistence) Save();
+        // if (enablePersistence) Save();
     }
 
     /// …or just increment when needed.
@@ -133,7 +133,7 @@ public class ProgressionSystem : SingletonMagic<ProgressionSystem>
     {
         collisions++;
         OnCollisionsChanged?.Invoke(collisions);
-        if (enablePersistence) Save();
+        // if (enablePersistence) Save();
     }
 
     // ===================== Helpers =====================
@@ -172,7 +172,7 @@ public class ProgressionSystem : SingletonMagic<ProgressionSystem>
         public double totalPlaySeconds; // <-- NEW
     }
 
-    private void Save()
+    public void Save()
     {
         try
         {
@@ -186,6 +186,7 @@ public class ProgressionSystem : SingletonMagic<ProgressionSystem>
             };
             var json = JsonUtility.ToJson(data);
             System.IO.File.WriteAllText(ProgressionSavePath.FilePath, json);
+            Debug.Log($"File saved: {ProgressionSavePath.FilePath}");
         }
         catch (Exception e)
         {

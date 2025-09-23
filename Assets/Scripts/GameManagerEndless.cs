@@ -293,6 +293,7 @@ public class GameManagerEndless : SingletonMagic<GameManagerEndless>
         // NOTE: we no longer freeze/stop NPC cars per your request
 
         Debug.Log("[GameManagerEndless] GAME OVER");
+        ProgressionSystem.Instance.Save();
     }
 
     
